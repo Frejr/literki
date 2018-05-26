@@ -34,7 +34,7 @@ function draw() {
   ctx.fillStyle = "black";
   letter = random_letter();
 	var text = ctx.measureText(letter);
-  ctx.fillText(letter , middle_width-Math.ceil(text.width/2), middle_height);
+  ctx.fillText(letter , middle_width-Math.ceil(text.width/2), middle_height+50);
   showed = new Date().getTime();
 }
 

@@ -8,7 +8,7 @@ body { margin: 0; padding: 0 }
 #canvas { width:100%; height:100%; margin:0px; }
 </style>
   </head>
-  <body onload="random_letter();">
+  <body>
     <canvas id="canvas"></canvas>
 
 <script type="text/javascript">
@@ -25,6 +25,11 @@ function random_letter() {
 function draw() {
 // Not too fast
   if ((new Date().getTime() - showed) < 2000) { return; }
+  if (letter != null) {
+    var sound_letter=(letter.substring(0,1).toLowerCase());
+    var audio = new Audio("mp3/"+sound_letter+".mp3");
+    audio.play();
+  }
   canvas.width  = window.innerWidth;
   canvas.height = window.innerHeight;
   middle_width = Math.ceil(canvas.width/2);

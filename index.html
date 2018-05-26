@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8">
+    <title>Literki</title>
+<style>
+body { margin: 0; padding: 0 }
+#canvas { width:100%; height:100%; margin:0px; }
+</style>
+  </head>
+  <body onload="random_letter();">
+    <canvas id="canvas"></canvas>
+
+<script type="text/javascript">
+function random_letter() {
+  var items = Array("A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "R", "S", "T", "U", "W", "Y", "Z");
+  var item = items[Math.floor(Math.random()*items.length)];
+  while (item == letter) {
+		item = items[Math.floor(Math.random()*items.length)];
+  }
+  letter=item
+  return item;
+}
+
+function draw() {
+  canvas.width  = window.innerWidth;
+  canvas.height = window.innerHeight;
+  middle_width = Math.ceil(canvas.width/2);
+  middle_height = Math.ceil(canvas.height/2);
+  ctx.font = "300pt Times New Roman";
+//  ctx.font = "300pt Arial";
+  ctx.fillStyle = "black";
+  letter = random_letter();
+	var text = ctx.measureText(letter);
+  ctx.fillText(letter , middle_width-Math.ceil(text.width/2), middle_height);
+}
+
+var canvas = document.getElementById('canvas');
+var ctx = canvas.getContext('2d');
+var letter = null
+draw()
+canvas.addEventListener('click', function() { draw()}, false);
+
+</script>
+  </body>
+</html>

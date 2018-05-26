@@ -23,6 +23,8 @@ function random_letter() {
 }
 
 function draw() {
+// Not too fast
+  if ((new Date().getTime() - showed) < 2000) { return; }
   canvas.width  = window.innerWidth;
   canvas.height = window.innerHeight;
   middle_width = Math.ceil(canvas.width/2);
@@ -33,13 +35,15 @@ function draw() {
   letter = random_letter();
 	var text = ctx.measureText(letter);
   ctx.fillText(letter , middle_width-Math.ceil(text.width/2), middle_height);
+  showed = new Date().getTime();
 }
 
 var canvas = document.getElementById('canvas');
 var ctx = canvas.getContext('2d');
-var letter = null
-draw()
-canvas.addEventListener('click', function() { draw()}, false);
+var letter = null;
+draw();
+var showed = new Date().getTime(); // When letter was displayed
+canvas.addEventListener('click', function() { draw(); }, true);
 
 </script>
   </body>

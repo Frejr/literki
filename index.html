@@ -24,14 +24,14 @@ function random_letter() {
   return item;
 }
 
+function play(letter) {
+  var audio = new Audio("mp3/"+letter+".mp3");
+  audio.play();
+}
+
 function draw() {
 // Not too fast
   if ((new Date().getTime() - showed) < 2000) { return; }
-  if (letter != null) {
-    var sound_letter=(letter.substring(0,1).toLowerCase());
-    var audio = new Audio("mp3/"+sound_letter+".mp3");
-    audio.play();
-  }
   canvas.width  = window.innerWidth;
   canvas.height = window.innerHeight;
   middle_width = Math.ceil(canvas.width/2);
@@ -50,7 +50,13 @@ var ctx = canvas.getContext('2d');
 var letter = null;
 draw();
 var showed = new Date().getTime(); // When letter was displayed
-canvas.addEventListener('click', function() { draw(); }, true);
+canvas.addEventListener('click', function() {
+  setTimeout(function(){draw(); }, 1000);
+  if (letter != null) {
+    var sound_letter=(letter.substring(0,1).toLowerCase());
+    play(sound_letter);
+  }
+}, true);
 
 </script>
   </body>

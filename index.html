@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="pl">
   <head>
     <meta charset="utf-8">
@@ -25,13 +26,14 @@ function random_letter() {
 }
 
 function play(letter) {
+  if ( red == 1 ) { return; }
   var audio = new Audio("mp3/"+letter+".mp3");
   audio.play();
 }
 
 function draw() {
 // Not too fast
-  if ((new Date().getTime() - showed) < 2000) { return; }
+  if ((new Date().getTime() - showed) < 1500) { return; }
   canvas.width  = window.innerWidth;
   canvas.height = window.innerHeight;
   middle_width = Math.ceil(canvas.width/2);
@@ -43,18 +45,21 @@ function draw() {
 	var text = ctx.measureText(letter);
   ctx.fillText(letter , middle_width-Math.ceil(text.width/2), middle_height+50);
   showed = new Date().getTime();
+  red = 0;
 }
 
 var canvas = document.getElementById('canvas');
 var ctx = canvas.getContext('2d');
 var letter = null;
+var red = 0;
 draw();
 var showed = new Date().getTime(); // When letter was displayed
 canvas.addEventListener('click', function() {
-  setTimeout(function(){draw(); }, 1000);
+  setTimeout(function(){draw(); }, 1500);
   if (letter != null) {
     var sound_letter=(letter.substring(0,1).toLowerCase());
     play(sound_letter);
+    red = 1;
   }
 }, true);
 
